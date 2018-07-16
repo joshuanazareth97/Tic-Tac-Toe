@@ -15,7 +15,7 @@ comp = {
 def setSymbols():
     s=""
     while(s !="X" and s != "O"):
-        s=input("Enter desired symbol X or O: ").upper()
+        s=input("Enter P1's desired symbol X or O: ").upper()
     user['symbol'] = s
     if(s == "O"):
         comp['symbol'] = "X"
@@ -55,8 +55,7 @@ def hasWon(player, curr_board):
         return False
 
 def main():
-    setSymbols()
-    current_player = user
+
     setTurn()
     board.clearBoard(board.board)
     while (not hasWon(current_player,board.board)) and board.isFree(board.board):
@@ -67,6 +66,11 @@ def main():
 
     board.displayBoard(board.board)
 
-
-
-main()
+wantsToPlay = True
+setSymbols()
+current_player = user
+while (wantstoPlay):
+    main()
+    inp = ("Play Again? (y/n): ".lower())
+    wantsToPlay = inp == 'y' or inp == 'yes'
+    
