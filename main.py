@@ -69,8 +69,7 @@ def main():
 wantsToPlay = True
 setSymbols()
 current_player = user
-while (wantstoPlay):
+while (wantsToPlay):
     main()
     inp = ("Play Again? (y/n): ".lower())
     wantsToPlay = inp == 'y' or inp == 'yes'
-    
