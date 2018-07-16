@@ -20,8 +20,9 @@ def displayBoard(board):
 #check for free space
 def isFree(board, n = None):
     if n==None:
-        for i in board:
+        for i in board[1:]:
             if i ==" ": return True
+        print("Board is full!")
         return False
     if (board[n] == " "):
         return True
