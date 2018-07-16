@@ -1,6 +1,6 @@
 # Contains the board array and the methods used to access and update the same
 
-board = [" "]*10 #array to represent 9 spaces on the board. Each can hold " ", "X" or "O"
+
 
 #function to print the board array in human readable form
 def displayBoard(board):
@@ -40,7 +40,8 @@ def updateBoard(board, n, char):
 
 def clearBoard(board):
     board = [" "]*10
-    board[0] = 9
+    board[0] = None
+    return board
 
 if __name__ == "__main__":
     print("This script must be imported into another to use properly!")

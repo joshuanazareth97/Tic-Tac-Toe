@@ -1,6 +1,9 @@
 import board
 from random import randint
 
+#array to represent 9 spaces on the board. Each can hold " ", "X" or "O"
+gameboard = []
+
 user = {
     'symbol': "", #Either "X" or "O"
     'id': 'p1'  #Can be 1 (2nd Turn) or 0 (1st Turn)
@@ -22,13 +25,6 @@ def setSymbols():
     else:
         comp['symbol'] = "O"
 
-def setTurn():
-    dice =  randint(0,1)
-    if dice :
-        current_player = user
-    else:
-        current_player = comp
-
 def getUserMove(curr_board,player):
     pos = int(input("{}'s move (1-9): ".format(player['id'].upper())))
     while not ((pos in range(1,10)) and (board.updateBoard(curr_board,pos,player['symbol']))):
@@ -37,7 +33,7 @@ def getUserMove(curr_board,player):
 
 def hasWon(player, curr_board):
     #get all spaces in whoch player has played
-    played_in = [i for i,x in enumerate(curr_board) if x ==player['symbol']]
+    played_in = [i for i,x in enumerate(curr_board) if x == player['symbol']]
     winning_positions = [
     [1,2,3],
     [4,5,6],
@@ -54,22 +50,23 @@ def hasWon(player, curr_board):
     else:
         return False
 
-def main():
-
-    setTurn()
-    board.clearBoard(board.board)
-    while (not hasWon(current_player,board.board)) and board.isFree(board.board):
+def game(curr_board):
+    current_player = user
+    curr_board = board.clearBoard(curr_board)
+    board.displayBoard(curr_board)
+    while (True):
+        if not board.isFree(curr_board): break
+        getUserMove(curr_board,current_player)
+        board.displayBoard(curr_board)
+        if hasWon(current_player,curr_board): break
         if current_player == user: current_player = comp
         else: current_player = user
-        board.displayBoard(board.board)
-        getUserMove(board.board,current_player)
 
-    board.displayBoard(board.board)
+
 
 wantsToPlay = True
 setSymbols()
-current_player = user
 while (wantsToPlay):
-    main()
-    inp = ("Play Again? (y/n): ".lower())
+    game(gameboard)
+    inp = input("Play Again? (y/n): ".lower())
     wantsToPlay = inp == 'y' or inp == 'yes'
