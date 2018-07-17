@@ -61,5 +61,5 @@ wantsToPlay = True
 setSymbols()
 while (wantsToPlay):
     game(gameboard)
-    inp = input("Play Again? (y/n): ".lower())
+    inp = input("Play Again? (y/n): ").lower()
     wantsToPlay = inp == 'y' or inp == 'yes'
