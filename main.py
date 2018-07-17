@@ -33,7 +33,7 @@ def getUserMove(curr_board,player):
 
 def hasWon(player, curr_board):
     #get all spaces in whoch player has played
-    played_in = [i for i,x in enumerate(curr_board) if x == player['symbol']]
+    played_moves = [i for i,x in enumerate(curr_board) if x == player['symbol']]
     winning_positions = [
     [1,2,3],
     [4,5,6],
@@ -44,11 +44,11 @@ def hasWon(player, curr_board):
     [1,5,9],
     [3,5,7]
     ]
-    if played_in in winning_positions:
-        print("{} has won!".format(player['id'].upper()))
-        return True
-    else:
-        return False
+    for list in winning_positions:
+        if(all(move in played_moves for move in list)):
+            print("{} has won!".format(player['id'].upper()))
+            return True
+    return False
 
 def game(curr_board):
     current_player = user
