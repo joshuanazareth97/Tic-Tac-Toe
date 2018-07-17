@@ -1,4 +1,4 @@
-# Contains the board array and the methods used to access and update the same
+# Contains the methods used to access and update the board array
 
 
 
