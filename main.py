@@ -1,4 +1,5 @@
 import board
+import ai
 from random import randint
 
 #array to represent 9 spaces on the board. Each can hold " ", "X" or "O"
@@ -26,29 +27,19 @@ def setSymbols():
         comp['symbol'] = "O"
 
 def getUserMove(curr_board,player):
-    pos = int(input("{}'s move (1-9): ".format(player['id'].upper())))
-    while not ((pos in range(1,10)) and (board.updateBoard(curr_board,pos,player['symbol']))):
-            pos = int(input("Enter VALID and FREE position (1-9): "))
+    if player == user:
+        while(True):
+            try:
+                pos = int(input("{}'s move (1-9): ".format(player['id'].upper())))
+                while not ((pos in range(1,10)) and (board.updateBoard(curr_board,pos,player['symbol']))):
+                        pos = int(input("Enter VALID and FREE position (1-9): "))
+                break
+            except:
+                print("Enter valid NUMBER please!")
+    elif player == comp:
+        move = ai.bestMove(curr_board, player['symbol'])
+        board.updateBoard(curr_board, move, player['symbol'])
 
-
-def hasWon(player, curr_board):
-    #get all spaces in whoch player has played
-    played_moves = [i for i,x in enumerate(curr_board) if x == player['symbol']]
-    winning_positions = [
-    [1,2,3],
-    [4,5,6],
-    [7,8,9],
-    [1,4,7],
-    [2,5,8],
-    [3,6,9],
-    [1,5,9],
-    [3,5,7]
-    ]
-    for list in winning_positions:
-        if(all(move in played_moves for move in list)):
-            print("{} has won!".format(player['id'].upper()))
-            return True
-    return False
 
 def game(curr_board):
     current_player = user
@@ -58,7 +49,7 @@ def game(curr_board):
         if not board.isFree(curr_board): break
         getUserMove(curr_board,current_player)
         board.displayBoard(curr_board)
-        if hasWon(current_player,curr_board): break
+        if ai.hasWon(current_player['symbol'],curr_board): break
         if current_player == user: current_player = comp
         else: current_player = user
 
