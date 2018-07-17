@@ -22,7 +22,7 @@ def isFree(board, n = None):
     if n==None:
         for i in board[1:]:
             if i ==" ": return True
-        print("Board is full!")
+        print("Tie!")
         return False
     if (board[n] == " "):
         return True
@@ -35,7 +35,7 @@ def updateBoard(board, n, char):
         board[n] = char
         return True
     else:
-        print("That space on the board is not free!")
+        # print("That space on the board is not free!")
         return False
 
 def clearBoard(board):

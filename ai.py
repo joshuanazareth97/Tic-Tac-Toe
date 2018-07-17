@@ -15,7 +15,7 @@ def hasWon(char, curr_board):
     ]
     for list in winning_positions:
         if(all(move in played_moves for move in list)):
-            print("{} has won!".format(char))
+            #print("{} has won!".format(char))
             return True
     return False
 
@@ -51,7 +51,7 @@ def bestMove(curr_board, char):
     simulation = [x for x in curr_board]
     if(board.updateBoard(simulation,5,char)):
         print("Playing center")
-        return i
+        return 5
 
     #If center is full, play edges
     for i in [2,4,6,8]:

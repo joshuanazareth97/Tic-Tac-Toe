@@ -49,7 +49,9 @@ def game(curr_board):
         if not board.isFree(curr_board): break
         getUserMove(curr_board,current_player)
         board.displayBoard(curr_board)
-        if ai.hasWon(current_player['symbol'],curr_board): break
+        if ai.hasWon(current_player['symbol'],curr_board):
+            print("{} has won!".format(current_player['symbol']))
+            break
         if current_player == user: current_player = comp
         else: current_player = user
 
