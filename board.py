@@ -16,6 +16,7 @@ def displayBoard(board):
     for space in board[1:4]:
         print(space + " | ", end = "")
     print("")
+    print("")
 
 #check for free space
 def isFree(board, n = None):
